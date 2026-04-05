@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 import SummaryCards from '@/components/SummaryCards';
 import SpendingBreakdown from '@/components/SpendingBreakdown';
+import BalanceTrendChart from '@/components/BalanceTrendChart';
 
 const Dashboard: React.FC = () => {
   return (
@@ -13,7 +14,10 @@ const Dashboard: React.FC = () => {
           <p className="text-sm text-muted-foreground">Welcome back! Here's your financial overview.</p>
         </div>
         <SummaryCards />
-        <SpendingBreakdown />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <SpendingBreakdown />
+          <BalanceTrendChart />
+        </div>
       </main>
     </div>
   );
