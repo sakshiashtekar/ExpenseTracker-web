@@ -66,16 +66,18 @@ const Insights: React.FC = () => {
       <Header />
       <main className="mx-auto max-w-6xl space-y-6 p-4 pb-12">
         <h1 className="text-2xl font-bold">Insights</h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-2 lg:grid-cols-4">
           {insightCards.map(c => (
             <Card key={c.title} className="transition-shadow hover:shadow-md">
-              <CardContent className="p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <c.icon className={`h-5 w-5 ${c.color}`} />
-                  <p className="text-sm text-muted-foreground">{c.title}</p>
+              <CardContent className="flex flex-col items-center gap-1.5 p-3 text-center sm:flex-row sm:items-center sm:gap-4 sm:p-5 sm:text-left">
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${c.color} bg-primary/10 sm:bg-transparent`}>
+                  <c.icon className="h-5 w-5" />
                 </div>
-                <p className="text-xl font-bold">{c.value}</p>
-                <p className="text-xs text-muted-foreground">{c.sub}</p>
+                <div className="min-w-0">
+                  <p className="text-[10px] text-muted-foreground sm:text-sm">{c.title}</p>
+                  <p className="text-sm font-bold sm:text-xl">{c.value}</p>
+                  <p className="text-xs text-muted-foreground">{c.sub}</p>
+                </div>
               </CardContent>
             </Card>
           ))}

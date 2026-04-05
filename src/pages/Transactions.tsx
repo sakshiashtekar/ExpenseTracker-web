@@ -56,33 +56,35 @@ const Transactions: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end">
           <div className="relative flex-1 min-w-[180px]">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input placeholder="Search..." className="pl-9" value={search} onChange={e => setSearch(e.target.value)} />
           </div>
           <Select value={filterCat} onValueChange={setFilterCat}>
-            <SelectTrigger className="w-[140px]"><SelectValue placeholder="Category" /></SelectTrigger>
+            <SelectTrigger className="w-full sm:w-[140px]"><SelectValue placeholder="Category" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
               {ALL_CATEGORIES.map(c => <SelectItem key={c} value={c}>{CATEGORY_ICONS[c]} {c}</SelectItem>)}
             </SelectContent>
           </Select>
-          <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-[120px]"><SelectValue placeholder="Type" /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="income">Income</SelectItem>
-              <SelectItem value="expense">Expense</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={sortBy} onValueChange={v => setSortBy(v as 'date' | 'amount')}>
-            <SelectTrigger className="w-[120px]"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="date">By Date</SelectItem>
-              <SelectItem value="amount">By Amount</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="grid grid-cols-2 gap-2 w-full sm:w-[290px]">
+            <Select value={filterType} onValueChange={setFilterType}>
+              <SelectTrigger className="w-full"><SelectValue placeholder="Type" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem value="income">Income</SelectItem>
+                <SelectItem value="expense">Expense</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={sortBy} onValueChange={v => setSortBy(v as 'date' | 'amount')}>
+              <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="date">By Date</SelectItem>
+                <SelectItem value="amount">By Amount</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {filtered.length === 0 ? (
@@ -97,15 +99,15 @@ const Transactions: React.FC = () => {
           <div className="space-y-2">
             {filtered.map(t => (
               <Card key={t.id} className="transition-shadow hover:shadow-md">
-                <CardContent className="flex items-center justify-between p-4">
-                  <div className="flex items-center gap-3">
+                <CardContent className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between p-4">
+                  <div className="flex min-w-0 items-center gap-3">
                     <span className="text-2xl">{CATEGORY_ICONS[t.category]}</span>
-                    <div>
-                      <p className="font-medium">{t.title}</p>
-                      <p className="text-xs text-muted-foreground">{t.category} · {format(parseISO(t.date), 'MMM dd, yyyy')}</p>
+                    <div className="min-w-0">
+                      <p className="font-medium truncate">{t.title}</p>
+                      <p className="text-xs text-muted-foreground truncate">{t.category} · {format(parseISO(t.date), 'MMM dd, yyyy')}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3 sm:justify-end w-full sm:w-auto">
                     <span className={`text-sm font-bold ${t.type === 'income' ? 'text-[hsl(var(--income))]' : 'text-[hsl(var(--expense))]'}`}>
                       {t.type === 'income' ? '+' : '-'}₹{t.amount.toLocaleString('en-IN')}
                     </span>

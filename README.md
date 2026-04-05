@@ -1,3 +1,5 @@
-# Finance Friend
+# Install dependencies
+Open terminal inside the project folder and run: npm install
 
-TODO: Document your project here
+# Start the project
+Run: npm run dev

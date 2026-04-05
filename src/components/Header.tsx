@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="FinTrack" className="h-8 w-8 rounded-lg object-contain" />
-            <span className="text-lg font-bold text-foreground">FinTrack</span>
+            <span className="text-lg font-bold text-foreground">ExpenseTracker</span>
           </Link>
 
           {/* Desktop nav */}
